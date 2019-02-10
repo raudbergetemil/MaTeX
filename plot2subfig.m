@@ -25,7 +25,7 @@ function s = plot2subfig(figureHandler,names,name,folder, caption)
     names = string(names);
     name = string(name);
     folder = string(folder);
-    caption = string(folder);
+    caption = string(caption);
     
     figureHandler = figureHandler(:);
     s = "";
