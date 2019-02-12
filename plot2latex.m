@@ -1,9 +1,9 @@
 function s = plot2latex(figureHandler, name,folder, caption)
 % Input:
-% figureHandler takes the handle of the figure that should be converted to latex
-% folder 
-% name is the desired name for the picture and is also the label
-% caption is pretty clear
+% figureHandler, takes the handle of the figure that should be converted to latex 
+% name, is the desired name for the picture and is also the label
+% folder, desired folder to save image in
+% caption, caption for the figure
 % 
 % Output:
 % s, the string which is copied into latex
