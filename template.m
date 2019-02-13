@@ -1,5 +1,5 @@
 function template(fun)
-%EXAMPLE - A reference function -
+% TEMPLATE  -
 %   ----------------------------------------------------------------------
 %   This function outputs a template function call of specified function
 %   ----------------------------------------------------------------------

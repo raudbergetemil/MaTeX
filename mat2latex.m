@@ -1,13 +1,19 @@
 function s = mat2latex(matrix, name, decimals)
-% 'matrix' the matrix itself
-% 'name' Name of matrix
-% 'decimals' number of decimal points
-
+% MAT2LATEX  -
+%   ----------------------------------------------------------------------
+%   This function outputs a string that is latex friendly
+%   ----------------------------------------------------------------------
+%   It takes an arbitrary matrix (MATRIX), a desired name (NAME) and the
+%   number of decimals (DECIMAL) the entries in the matrix should 
+%   be rounded to.
+%   ----------------------------------------------------------------------
+    
+    name = string(name);
     s = sprintf("\\begin{equation}" + " \n" + ...
         "\t\\centering" + "\n" + ...
         "\t%s=%s" + "\n" + ...
         "\t\\label{%s}" +  "\n" + ...
-        "\\end{equation}", [name, latex(vpa(sym(matrix),decimals)), name]);
+        "\\end{equation}", [name, latex(vpa(sym(matrix), decimals)), name]);
     
     comment_1 = sprintf("\n%%====== Creating Matrix %s ======%%\n",name);
    
