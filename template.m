@@ -11,6 +11,10 @@ function template(fun)
 if ~ (fun(end-1:end) == '.m')
     fun = [fun,'.m'];
 end
+if ~(exist(fun) == 2)
+    error(sprintf("''%s'' is not a function", fun));
+    return;
+end
 content = textscan(fopen(fun), '%s', 'Delimiter', '\n');
 content = content{1};
 
