@@ -4,7 +4,8 @@ function progress(p, varargin)
 %   This function displays a progress bar provided a percentage. It checks
 %   wheter the user used -desktop or -nodesktop and uses that as basis for
 %   GUI or not. To override this, provide the function with -forceGUI or
-%   -forceCMD depending on wanted result. When using CMD provide the
+%   -forceCMD depending on wanted result. When using GUI, provide the 
+%   figurehandle of a waitbar When using CMD provide the
 %   function with a width if not standard works for the current size of
 %   terminal.
 %
@@ -19,27 +20,30 @@ function progress(p, varargin)
 %   example use:
 %   progress(0.5)
 %   progress(0.1, 'forceCMD', -width, 80)
-%   progress(0.4, 'forceGUI')
+%   progress(0.4, 'forceGUI', waitbar_handler)
 
 GUI = usejava('desktop');
+wait = [];
 width = 70;
-for i = 1:nargin
-    if string(varargin{i}) == "forceGUI"
+for i = 1:nargin-1
+    if varargin{i} == "forceGUI"
         GUI = true;
-    elseif string(varargin{i}) == "forceCMD"
+        wait = varargin{i+1};
+    elseif varargin{i} == "forceCMD"
         GUI = false;
-    elseif string(varargin{i}) == "-width"
-        width = cell2mat(varargin{i+1});
+    elseif varargin{i} == "-width"
+        width = varargin{i+1};
     end
 end
 
 if GUI
-    waitbar(p, 'Progress')
+    waitbar(p, wait);
 else
     barLen  = round(width*p);
     space   = round(width*(1-p));
+    fprintf("\033[A")
+    fprintf("\033[2K")
     bar = ['|', char(kron('=', ones(1, barLen))), '>', char(kron(' ', ones(1, space))), '|', char(string(p*100)), '%%\n'];
-    clc;
     fprintf(bar)
 end
 end
