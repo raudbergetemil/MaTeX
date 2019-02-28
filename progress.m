@@ -19,19 +19,19 @@ function progress(p, varargin)
 %   ----------------------------------------------------------------------
 %   example use:
 %   progress(0.5)
-%   progress(0.1, 'forceCMD', -width, 80)
+%   progress(0.1, 'forceCMD', 'width', 80)
 %   progress(0.4, 'forceGUI', waitbar_handler)
 
 GUI = usejava('desktop');
 wait = [];
 width = 70;
 for i = 1:nargin-1
-    if varargin{i} == "forceGUI"
+    if isstring(varargin{i}) && strcmp(varargin{i}, 'forceGUI')
         GUI = true;
         wait = varargin{i+1};
-    elseif varargin{i} == "forceCMD"
+    elseif isstring(varargin{i}) && strcmp(varargin{i},'forceCMD')
         GUI = false;
-    elseif varargin{i} == "-width"
+    elseif ischar(varargin{i}) && strcmp(varargin{i},'width')
         width = varargin{i+1};
     end
 end
