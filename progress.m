@@ -4,8 +4,7 @@ function progress(p, varargin)
 %   This function displays a progress bar provided a percentage. It checks
 %   wheter the user used -desktop or -nodesktop and uses that as basis for
 %   GUI or not. To override this, provide the function with -forceGUI or
-%   -forceCMD depending on wanted result. When using GUI, provide the 
-%   figurehandle of a waitbar When using CMD provide the
+%   -forceCMD depending on wanted result. When using CMD provide the
 %   function with a width if not standard works for the current size of
 %   terminal.
 %
@@ -20,12 +19,8 @@ function progress(p, varargin)
 %   example use:
 %   progress(0.5)
 %   progress(0.1, 'forceCMD', 'width', 80)
-%   progress(0.4, 'forceGUI', waitbar_handler)
+%   progress(0.4, 'forceGUI')
 
-% if ~exist('wait')    
-%     global wait;
-%     wait = waitbar(0);
-% end
 
 GUI = usejava('desktop');
 p = min(p,1);
