@@ -22,14 +22,20 @@ function progress(p, varargin)
 %   progress(0.1, 'forceCMD', 'width', 80)
 %   progress(0.4, 'forceGUI', waitbar_handler)
 
+% if ~exist('wait')    
+%     global wait;
+%     wait = waitbar(0);
+% end
+
 GUI = usejava('desktop');
-wait = [];
+p = min(p,1);
+
+
 width = 70;
 for i = 1:nargin-1
-    if isstring(varargin{i}) && strcmp(varargin{i}, 'forceGUI')
+    if ischar(varargin{i}) && strcmp(varargin{i}, 'forceGUI')
         GUI = true;
-        wait = varargin{i+1};
-    elseif isstring(varargin{i}) && strcmp(varargin{i},'forceCMD')
+    elseif ischar(varargin{i}) && strcmp(varargin{i},'forceCMD')
         GUI = false;
     elseif ischar(varargin{i}) && strcmp(varargin{i},'width')
         width = varargin{i+1};
@@ -37,13 +43,18 @@ for i = 1:nargin-1
 end
 
 if GUI
-    waitbar(p, wait);
+    global wait
+    if isempty(wait)
+        wait = waitbar(p);
+    else
+        waitbar(p, wait);
+    end
 else
     barLen  = round(width*p);
     space   = round(width*(1-p));
     fprintf("\033[A")
     fprintf("\033[2K")
-    bar = ['|', char(kron('=', ones(1, barLen))), '>', char(kron(' ', ones(1, space))), '|', char(string(p*100)), '%%\n'];
+    bar = ['|', char(kron('=', ones(1, barLen))), '>', char(kron(' ', ones(1, space))), '|', char(string(round(p*100,1))), '%%\n'];
     fprintf(bar)
 end
 end
