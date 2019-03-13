@@ -43,7 +43,7 @@ end
 
 if GUI
     global wait
-    if isempty(wait)
+    if isempty(wait) || ~isvalid(wait)
         wait = waitbar(p, title);
     else
         waitbar(p, wait, title);
