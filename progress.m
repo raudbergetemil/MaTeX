@@ -14,7 +14,8 @@ function progress(p, varargin)
 %   p
 %   OPTIONAL:
 %   forceGUI or forceCMD
-%   -width [value]  (Used for CMD to determine width of progressbar)
+%   width [value]  (Used for CMD to determine width of progressbar)
+%   title [value]  (Adds a title to the bar, both GUI and CMD)
 %   ----------------------------------------------------------------------
 %   example use:
 %   progress(0.5)
@@ -24,6 +25,7 @@ function progress(p, varargin)
 
 GUI = usejava('desktop');
 p = min(p,1);
+title = sprintf("Doing some loading for %s",  char(java.lang.System.getProperty('user.name')));
 
 
 width = 70;
@@ -34,15 +36,20 @@ for i = 1:nargin-1
         GUI = false;
     elseif ischar(varargin{i}) && strcmp(varargin{i},'width')
         width = varargin{i+1};
+    elseif ischar(varargin{i}) && strcmp(varargin{i},'title')
+        title = varargin{i+1};
     end
 end
 
 if GUI
     global wait
     if isempty(wait)
-        wait = waitbar(p);
+        wait = waitbar(p, title);
     else
-        waitbar(p, wait);
+        waitbar(p, wait, title);
+    end
+    if p>=1
+        close(wait)
     end
 else
     barLen  = round(width*p);
