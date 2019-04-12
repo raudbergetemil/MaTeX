@@ -1,4 +1,4 @@
-function s = plot2subfig(figureHandler,names,name,folder, caption)
+function s = plot2subfig(figureHandlers,names,name,folder, captions)
 % Input:
 % figureHandler is a list of figure handles of pictures to print
 % names is a list of names of each figure
@@ -13,27 +13,27 @@ function s = plot2subfig(figureHandler,names,name,folder, caption)
         mkdir(folder)
     end
     
-    n = length(figureHandler);
-    if ~ n == length(names) == length(caption)
+    n = length(figureHandlers);
+    if ~ n == length(names) == length(captions)
         error("figureHandler, names and caption needs to be of same length")
     end
     
-    if iscell(figureHandler) | iscell(names) | iscell(caption)
+    if iscell(figureHandlers) | iscell(names) | iscell(captions)
         error("Use array and not cell arrays for figureHandler, names and caption")
     end
     
     names = string(names);
     name = string(name);
     folder = string(folder);
-    caption = string(caption);
+    captions = string(captions);
     
-    figureHandler = figureHandler(:);
+    figureHandlers = figureHandlers(:);
     s = "";
     
     s=sprintf("\\begin{figure}[h]");
-    for i = 1:length(figureHandler)
-        s = sprintf("%s\n%s", [s, fig(names(i),caption(i))]);
-        saveas(figureHandler(i), folder + "/" + names(i), "png");
+    for i = 1:length(figureHandlers)
+        s = sprintf("%s\n%s", [s, fig(names(i),captions(i))]);
+        saveas(figureHandlers(i), folder + "/" + names(i), "png");
     end
     
     s = sprintf("%s\n\\caption{}\n\\label{%s}\n\\end{figure}\n", [s,name]);
