@@ -41,7 +41,7 @@ function s = plot2latex(figureHandler, name, folder, caption, varargin)
             "\t\\label{%s}" +  "\n" + ...
             "\\end{figure}", [name, caption, name]);
 
-    saveas(figureHandler, folder + "/" + name, "eps");
+    saveas(figureHandler, folder + "/" + name, "epsc");
 
     
 
