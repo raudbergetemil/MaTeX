@@ -8,12 +8,11 @@ function section(str, reinit)
     %   file or if it should overwrite its content.
     %   ----------------------------------------------------------------------
 
-    if ~isstring(str)
-        error(sprintf("The first arguments has to be a string, \'%s'\ is not a string", str));
-    elseif ~islogical(reinit)
-        error(sprintf("The second argument must be a logical, \'%s\' is not a logical", reinit));
+    if ~islogical(reinit)
+        error("The second argument must be a logical, \'%s\' is not a logical", reinit);
     end
     
+    str = string(str);
     if reinit
         fprintf(fopen("output", 'w'), "\\section*{%s}", str);
     else
