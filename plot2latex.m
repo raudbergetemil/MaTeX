@@ -52,9 +52,9 @@ function s = plot2latex(figureHandler, name, folder, caption, varargin)
     s = comment_1 + s + comment_2;
 
     if nargin > 4 && reinit
-        fprintf(fopen("output", 'w'), "%s", s);
+        fprintf(fopen("output.tex", 'w'), "%s", s);
     elseif nargin > 4 && ~reinit
-        fprintf(fopen("output", 'a'), "%s", s);
+        fprintf(fopen("output.tex", 'a'), "%s", s);
     else
         return
     end

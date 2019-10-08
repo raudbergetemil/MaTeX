@@ -14,9 +14,9 @@ function section(str, reinit)
     
     str = string(str);
     if reinit
-        fprintf(fopen("output", 'w'), "\\section*{%s}", str);
+        fprintf(fopen("output.tex", 'w'), "\\section*{%s}", str);
     else
-        fprintf(fopen("output", 'a'), "\\section*{%s}", str);
+        fprintf(fopen("output.tex", 'a'), "\\section*{%s}", str);
     end
 
     end

@@ -14,9 +14,9 @@ function comment(str, reinit)
     
     str = string(str);
     if reinit
-        fprintf(fopen("output", 'w'), "%s", str);
+        fprintf(fopen("output.tex", 'w'), "%s", str);
     else
-        fprintf(fopen("output", 'a'), "%s", str);
+        fprintf(fopen("output.tex", 'a'), "%s", str);
     end
 
     end

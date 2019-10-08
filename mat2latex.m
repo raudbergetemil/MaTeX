@@ -40,9 +40,9 @@ function s = mat2latex(matrix, name, decimals, varargin)
     s = comment_1 + s + comment_2;
 
     if nargin > 3 && reinit
-        fprintf(fopen("output", 'w'), "%s", s);
+        fprintf(fopen("output.tex", 'w'), "%s", s);
     elseif nargin > 3 && ~reinit
-        fprintf(fopen("output", 'a'), "%s", s);
+        fprintf(fopen("output.tex", 'a'), "%s", s);
     else
         return
     end
